@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+</head>
+<body>
+    <script>
+        function getComputerChoice () {
+            const choices = ['rock', 'paper', 'scissors'];
+            const randomNum = Math.floor(Math.random() * 3);
+            return choices[randomNum];
+        }
+
+        function getHumanChoice () {
+            let choice = prompt('choose your weapon').toLowerCase(); 
+            while (!['rock', 'paper', 'scissors'].includes(choice)) {
+                choice = prompt('Invalid choice. Please type rock, paper, or scissors.').toLowerCase();
+            }
+            return choice; 
+        }
+
+        let humanScore = 0; 
+        let computerScore = 0;
+
+        function playRound () {
+            const humanChoice = getHumanChoice(); 
+            const computerChoice = getComputerChoice();
+
+            console.log(`You chose: ${humanChoice}`);
+            console.log(`Computer chose: ${computerChoice}`);
+
+            if (humanChoice === computerChoice) {
+                console.log("It's a tie!");
+            } else if (
+                (humanChoice === 'rock' && computerChoice === 'scissors') ||
+                (humanChoice === 'paper' && computerChoice === 'rock') ||
+                (humanChoice === 'scissors' && computerChoice === 'paper')
+            ) {
+                console.log(`You win! ${humanChoice} beats ${computerChoice}!`);
+                humanScore += 1; 
+                console.log(`Your score: ${humanScore}`); 
+                console.log(`Computer's score: ${computerScore}`);
+            } else {
+                console.log(`You lose! ${computerChoice} beats ${humanChoice}!`);
+                computerScore += 1; 
+                console.log(`Your score: ${humanScore}`); 
+                console.log(`Computer's score: ${computerScore}`);
+            }
+        }
+
+        // Play 5 rounds
+        for (let i = 1; i <= 5; i++) {
+            console.log(`Round ${i}:`);
+            playRound();
+        }
+
+        // Final Result
+        if (humanScore > computerScore) {
+            console.log("🎉 You won the game!");
+        } else if (humanScore < computerScore) {
+            console.log("😞 You lost the game.");
+        } else {
+            console.log("🤝 It's a tie game!");
+        } 
+    </script>
+</body>
+</html>
